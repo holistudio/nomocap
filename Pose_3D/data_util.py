@@ -509,7 +509,7 @@ def read_3d_data( actions, data_dir, camera_frame=False,rcams=0,vcams=0,n_interp
 
 
   train_set = normalize_data( train_set, data_mean, data_std, dim_to_use, actions )
-  test_set  = normalize_data( test_set,  data_mean, data_std, dim_to_use, actions
+  test_set  = normalize_data( test_set,  data_mean, data_std, dim_to_use, actions )
 
   # Load the offsets (bone lengths)
   # CHANGED: Commented out as offsets are unnecessary
@@ -518,9 +518,9 @@ def read_3d_data( actions, data_dir, camera_frame=False,rcams=0,vcams=0,n_interp
 
   # CHANGED: Commented out as offsets are unnecessary
   # return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions, offsets_train, offsets_test
-
   # CHANGED: Uncommented line below
-  return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions
+  return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions;
+
 
 def postprocess_3d( poses_set ):
   """
