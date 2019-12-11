@@ -20,7 +20,7 @@ let poseShapes = [];
 let value = 0;
 
 function preload(){
-  writer = createWriter('extract.obj');
+  let writer;
 }
 
 function mouseClicked() {
@@ -30,6 +30,7 @@ function mouseClicked() {
 
 function keyPressed() {
   if (value === 0) {
+    writer = createWriter('extract.obj');
     video.play();
     value = 255;
   } else {
