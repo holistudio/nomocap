@@ -76,6 +76,11 @@ function slope(point1, point2){
   return sl;
 }
 
+function distance(point1, point2){
+  let dist = Math.sqrt((point2.x-point1.x)*(point2.x-point1.x)+(point2.y-point1.y)*(point2.y-point1.y));
+  return dist;
+}
+
 function draw() {
 
   background(0);
@@ -108,11 +113,16 @@ function draw() {
 
       //calculate hip, neck, and head points
       //hip, midpoint of keypoints 11 and 12
-      keyShape.push(midPoint(keyShape[11],keyShape[12]));
+      keyShape.push(midPoint(keyShape[7],keyShape[8]));
       //neck, midpoint of keypoints 5 and 6
       keyShape.push(midPoint(keyShape[1],keyShape[2]));
       //head is double the distance bewteen nose and neck
-      keyShape.push(keyShape[keyShape.length-1]+2*slope(keyShape[keyShape.length-1],keyShape[0]));
+      let neck = keyShape[keyShape.length-1];
+      // let halfHead = distance(neck,keyShape[0]);
+      let head = {"x": 0, "y":0};
+      head.x = neck.x + 1.5*(keyShape[0].x-neck.x);
+      head.y = neck.y + 1.5*(keyShape[0].y-neck.y);
+      keyShape.push(head);
 
       //draw circles showing detected parts
       for (let i = 0; i < keyShape.length; i++) {
