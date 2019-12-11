@@ -1,7 +1,12 @@
-
+var keyPtsOfInterest = [0,5,9,13,15,16,14,10,6];
 let spacing = 10;
 let drawFrame = 0;
 let numDrawFrames = 10;
+
+let video;
+let poseNet;
+let w = 640;
+let h = 480;
 
 let writer;
 const objRecordRate = 5;
@@ -9,14 +14,10 @@ const objRecordSpacing = 50;
 let objRecordX = 0;
 let keyVertex = 1;
 
-let video;
-let poseNet;
-let w = 640;
-let h = 480;
-var keyPtsOfInterest = [0,5,9,13,15,16,14,10,6];
-
 let poses = [];
 let poseShapes = [];
+
+let value = 0;
 
 function preload(){
   writer = createWriter('extract.obj');
@@ -27,6 +28,14 @@ function mouseClicked() {
   writer.clear();
 }
 
+function keyPressed() {
+  if (value === 0) {
+    video.play();
+    value = 255;
+  } else {
+    value = 0;
+  }
+}
 
 function gotPoses(estimatedPoses){
   poses = estimatedPoses;
@@ -34,51 +43,50 @@ function gotPoses(estimatedPoses){
 
 function setup() {
   createCanvas(w, h);
-  frameRate(20);
-  video = createVideo('nanquan4s.mp4');
+  // frameRate(10);
+  video = createVideo('static/nanquan4s.mp4');
 
   video.size(w, h);
-  // video = createCapture(VIDEO);
+
   poseNet = ml5.poseNet(video);
   // This sets up an event that fills the global variable "poses"
   // with an array every time new poses are detected
   poseNet.on('pose', function(results) {
     poses = results;
 	});
-  video.hide();
+  // video.play();
+  // video.hide();
 
   noFill();
-
-
+  // var writer = createWriter('extract.obj');
 }
 
 function draw() {
 
-  // background(0);
-  image(video, 0, 0, video.width, video.height);
-  fill(0,.4*255);
-  rect(0,0,video.width,video.height);
-  noFill();
+  background(0);
+  // image(video, 0, 0, video.width, video.height);
+
   if(poses.length>=1){
     //for each pose detected
     var pose = poses[0].pose;
 
-
     //record newest shape
     let keyShape=[];
     // let numVertices = 0;
-    for(let j = 0; j < keyPtsOfInterest.length;j++){
+    for(var j = 0; j < keyPtsOfInterest.length;j++){
       //each key point and position is stored in variables
       var keypoint = pose.keypoints[keyPtsOfInterest[j]];
       var position = keypoint.position;
 
-      if (keypoint.score > 0.2){
+      if (keypoint.score > 0.03){
         // if keypoint's score is significant, store it in keyShape
+        // writer.print(`v ${drawFrame} ${position.x} ${position.y}`);
+        // numVertices = numVertices+1;
         keyShape.push(position);
       }
     }
-    console.log(frameCount);
-    //for every nth frame (objRecordRate)
+
+
     if(frameCount % objRecordRate == 0){
       //if keyShape has more than 2 positions
       if(keyShape.length>2){
@@ -108,9 +116,6 @@ function draw() {
 
     }
 
-
-
-    //draw shapes over video
     //if poseShapes length is less than numDrawFrames
     if(poseShapes.length<numDrawFrames){
       //add shape to end of array, as an array of positions
@@ -138,6 +143,4 @@ function draw() {
       poseShapes.splice(0, 1);
     }
   }
-
-
 }
