@@ -9,6 +9,7 @@ import time
 import h5py
 import copy
 import glob
+import csv
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -208,22 +209,27 @@ def create_movie():
 
     fnames = sorted(glob.glob(FLAGS.img_dir+"*.jpg"))
     #print(fnames[0],fnames[1])
-    for i in range(n2d):
-      #t0 = time()
-      print("Working on figure {0:04d} / {1:05d}... \n".format(i+1, n2d), end='')
-      p2d = enc_in[i,:]
-      im =  Image.open( fnames[i] )
-      ob1.update(im,p2d)
-      # Plot 3d gt
-      p3d = poses3d[i,:]
-      ob2.update(p3d)
-      fig.canvas.draw()
-      img_str = np.fromstring (fig.canvas.tostring_rgb(), np.uint8)
-      ncols, nrows = fig.canvas.get_width_height()
-      nparr = np.fromstring(img_str, dtype=np.uint8).reshape(nrows, ncols, 3)
-      #img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
-      print(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1))
-      cv2.imwrite(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1), nparr[:,:,::-1])
+
+    import csv
+    with open((FLAGS.output_dir+'vertices.csv'), 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_NONNUMERIC)
+        for i in range(n2d):
+          #t0 = time()
+          print("Working on figure {0:04d} / {1:05d}... \n".format(i+1, n2d), end='')
+          p2d = enc_in[i,:]
+          im =  Image.open( fnames[i] )
+          ob1.update(im,p2d)
+          # Plot 3d gt
+          p3d = poses3d[i,:]
+          spamwriter.writerow(p3d)
+          ob2.update(p3d)
+          fig.canvas.draw()
+          img_str = np.fromstring (fig.canvas.tostring_rgb(), np.uint8)
+          ncols, nrows = fig.canvas.get_width_height()
+          nparr = np.fromstring(img_str, dtype=np.uint8).reshape(nrows, ncols, 3)
+          #img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
+          print(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1))
+          cv2.imwrite(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1), nparr[:,:,::-1])
 
 
 
