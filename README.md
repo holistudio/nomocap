@@ -22,7 +22,7 @@ Pose_3D/trained_model/
 ```
 These two folders need to be created and filled with the following data:
 
-`h36m` contains the Human3.6 baseline 3D pose data, which can be downloaded with wget:
+`h36m` folder contains the Human3.6 baseline 3D pose data, which can be downloaded with wget:
 ```
 wget https://www.dropbox.com/s/e35qv3n6zlkouki/h36m.zip
 ```
