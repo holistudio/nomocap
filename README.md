@@ -1,4 +1,5 @@
 # nomocap
+
  "motion capture" in the wild
 
 Based on rayat137's Pose_3D code https://github.com/rayat137/Pose_3D
@@ -35,11 +36,39 @@ wget https://www.dropbox.com/s/e35qv3n6zlkouki/h36m.zip
  2. Create the following folders within trained_model (yes all of them): `Pose_3D/temporal_3d_release/trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5/`
  3. Untar the downloaded file and move them to the above filepath.
 
-# Dependencies
+## Dependencies
 
 First it's recommended to use Anaconda or some other virtual environment. Once the virtual environment is activated, use pip to install the requirements.txt file:
 ```
 pip install -r requirements.txt
 ```
 
-Note the versions of tensorflow and opencv-python/opencv-contrib-python. The version numbers for those are **critical**.
+Note the versions of tensorflow, opencv-python, and opencv-contrib-python. The version numbers for those are **critical**.
+## Steps
+
+Now that you have everything installed you need to do the following to get 3D pose estimates.
+
+1. Get 2D pose estimate data from raw video
+2. Get image frames of the video
+3. Save both of those into Pose_3D `input folder`
+4.
+
+## Getting 2D Pose Estimates
+
+Hossain and Little used 2D pose estimates using Stacked Hourglass prior to running their 3D pose estimation script to generate the `*.h5` file (see `fed/preds.h5`).
+
+I was more familiar with using PoseNet for 2D pose estimates so I wrote some scripts to convert PoseNet estimates to the Human3.6M dataset standard:
+
+<img src="img/PoseNetvsPose3D-01.png" width="500"/>
+
+
+`h5converter.py` takes the csv file and generates the h5 file needed for the 3D pose estimates.
+
+Images of the video were obtained by opening the video in Premiere and exporting the frames to jpg files. Other methods may be available online if you don't have Premier.
+
+
+
+## References
+https://github.com/rayat137/Pose_3D
+
+DaVinci's Vitruvian Man from Wikipedia https://en.wikipedia.org/wiki/Vitruvian_Man#/media/File:Da_Vinci_Vitruve_Luc_Viatour.jpg
