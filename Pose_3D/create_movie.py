@@ -211,6 +211,8 @@ def create_movie():
     #print(fnames[0],fnames[1])
 
     import csv
+
+    # CHANGED: write pose estimate coordinates to a csv file in the same output directory
     with open((FLAGS.output_dir+'vertices.csv'), 'w', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_NONNUMERIC)
         for i in range(n2d):
@@ -221,6 +223,8 @@ def create_movie():
           ob1.update(im,p2d)
           # Plot 3d gt
           p3d = poses3d[i,:]
+
+          # Each row of the csv file consists of all the x,y,z coordinates of a single 3D pose estimate.
           spamwriter.writerow(p3d)
           ob2.update(p3d)
           fig.canvas.draw()
