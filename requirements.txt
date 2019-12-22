@@ -38,3 +38,6 @@ Werkzeug
 wheel
 wincertstore
 wrapt
+Flask
+Flask-Session
+psycopg2
