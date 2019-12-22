@@ -40,7 +40,9 @@ The `h36m` folder contains the Human3.6 baseline 3D pose data, which can be down
 ```
 wget https://www.dropbox.com/s/e35qv3n6zlkouki/h36m.zip
 ```
-(wget can be installed for Windows through this link: https://sourceforge.net/projects/gnuwin32/files/wget/1.11.4-1/wget-1.11.4-1-setup.exe/download?use_mirror=excellmedia)
+(wget can be installed for Windows through this link: https://sourceforge.net/projects/gnuwin32/files/wget/1.11.4-1/wget-1.11.4-1-setup.exe/download?use_mirror=excellmedia. Once installed, add `C:\Program Files (x86)\GnuWin32\bin` to your PATH environment variable.)
+
+Chances are, after downloading with wget, you will have a file literally named `file`. Rename it to `h36m.zip` and unzip to a new `h36m` folder inside Pose_3D directory.
 
 The `trained_model` folder contains the trained model
 
