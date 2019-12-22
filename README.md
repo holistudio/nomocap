@@ -65,6 +65,8 @@ For reference, below is a "conversion chart" for Human3.6M's and PoseNet's pose 
 
 <img src="img/PoseNetvsPose3D-01.png" width="500"/>
 
+(Human3.6M tracks more joints/body parts shown above. A quick reference for joint numbers can be found in `Pose_3D/data_util.py` )
+
 **Using PoseNet**
 
 If you have no experience with 2D pose estimation, a good place to start is the `Pose_2D` folder.
@@ -84,7 +86,9 @@ If you have no experience with 2D pose estimation, a good place to start is the 
  6. Change directory to `Pose_3D/input_files/` and run `python h5converter.py`. Then you have a `preds.h5` file written.
  7. Assuming you have the video frame images, you're ready to run the Pose_3D `create_movie.py` code, as described in step 4 in the previous section.
 
-### Pose_3DView
+### Pose_3DView - Viewing 3D Pose Animations in 3D
+
+Viewing the 3D poses in a 3D environment can be done with code in `Pose_3DView`. Additional instructions can be found in the README in that folder. Copy paste `Pose_3D/output_result/vertices.csv` into `Pose_3DView/data/`.
 
 ## References
 

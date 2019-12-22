@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12)
-project(FinalProject)
+project(Pose_3DView)
 
 find_package(OpenGL REQUIRED)
 find_package(GLU REQUIRED)
