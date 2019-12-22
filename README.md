@@ -14,7 +14,13 @@ Diagram of the current pipeline:
 
 ### Dependencies
 
-First it's recommended to use Anaconda or some other virtual environment. Once the virtual environment is activated, use pip to install the requirements.txt file:
+First it's recommended to use Anaconda or some other virtual environment.
+
+```
+conda create --name nomocap python=3.7
+```
+
+Once the virtual environment is activated, use pip to install the requirements.txt file:
 ```
 pip install -r requirements.txt
 ```
