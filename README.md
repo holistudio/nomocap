@@ -66,6 +66,7 @@ For reference, below is a "conversion chart" for Human3.6M's and PoseNet's pose 
 <img src="img/PoseNetvsPose3D-01.png" width="500"/>
 
 **Using PoseNet**
+
 If you have no experience with 2D pose estimation, a good place to start is the `Pose_2D` folder.
 
  1. Copy a video of your choice into `Pose_2D\static\` as `video.mp4` (If you're comfortable with some coding, modify `sketch.js` file, line `video = createVideo('static/video.mp4');`)
@@ -87,7 +88,8 @@ If you have no experience with 2D pose estimation, a good place to start is the 
 
 ## References
 
-The Pose_3D code is slightly modified from code referenced in Hossain and Little's paper:
+The Pose_3D code is slightly modified from code referenced in Hossain and Little's [paper](http://openaccess.thecvf.com/content_ECCV_2018/html/Mir_Rayat_Imtiaz_Hossain_Exploiting_temporal_information_ECCV_2018_paper.html):
+
 https://github.com/rayat137/Pose_3D
 Based on reported issues in the original repository, several changes were made to the Pose_3D code, namely the following files:
 
