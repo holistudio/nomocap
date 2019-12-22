@@ -30,6 +30,7 @@ function mouseClicked() {
 }
 
 function keyPressed() {
+  // pressing any key starts the video and starts writing to a csv file
   if (value === 0) {
     writer = createWriter('array.csv');
     video.play();
@@ -47,8 +48,8 @@ function gotPoses(estimatedPoses){
 function setup() {
   createCanvas(w, h);
   frameRate(30);
-  video = createVideo('static/nanquan4s.mp4');
-
+  // load video of human movement
+  video = createVideo('static/video.mp4');
   video.size(w, h);
 
   poseNet = ml5.poseNet(video);
@@ -57,11 +58,7 @@ function setup() {
   poseNet.on('pose', function(results) {
     poses = results;
 	});
-  // video.play();
-  // video.hide();
-
   fill(255);
-  // var writer = createWriter('extract.obj');
 }
 
 function midPoint(point1, point2){
