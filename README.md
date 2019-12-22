@@ -65,6 +65,8 @@ For reference, below is a "conversion chart" for Human3.6M's and PoseNet's pose 
 
 <img src="img/PoseNetvsPose3D-01.png" width="500"/>
 
+(Human3.6M tracks more joints/body parts shown above. A quick reference for joint numbers can be found in `Pose_3D/data_util.py` )
+
 **Using PoseNet**
 If you have no experience with 2D pose estimation, a good place to start is the `Pose_2D` folder.
 
