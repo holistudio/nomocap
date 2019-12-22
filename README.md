@@ -40,7 +40,7 @@ The `trained_model` folder contains the trained model
 
  0. Create the trained_model folder within Pose_3D directory
  1. Download the tar file: https://drive.google.com/file/d/1j2jpwDpfj5NNx8n1DVqCIAESNTDZ2BDf/view?usp=sharing
- 2. Create the following folders within trained_model (yes all of them): `Pose_3D/temporal_3d_release/trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5/`
+ 2. Create the following folders within `Pose_3D\trained_model` (yes all of them): `All\dropout_0.5\epochs_100\adam\lr_1e-05\linear_size1024\batch_size_32\use_stacked_hourglass\seqlen_5`
  3. Untar the downloaded file and move them to the above filepath.
 
 
@@ -48,7 +48,7 @@ The `trained_model` folder contains the trained model
 
 Now that you have everything installed and downloaded, you need to do the following to get 3D pose estimates:
 
-1. Get 2D pose estimate data from raw video saved as a `*.h5` file. More on this in the next section.
+1. Get 2D pose estimate data from raw video saved as a `*.h5` file. This can be done with code in the `Pose_2D` folder. More on this in the next section.
 2. Get image frames of the video as jpg files. This can be done using Premiere to export the raw video as jpg files for frames at the same framerate as your 2D pose estimate data (likely ~30fps). Other methods may be available online if you don't have Premiere.
 3. Save files from both steps into `Pose_3D/input_files`
 4. In terminal, set current directory as `Pose_3D` run the `create_movie.py` script (`python create_movie.py`). If you are using a virtual environment, of course, make sure it's activated.
