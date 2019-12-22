@@ -46,7 +46,7 @@ The `trained_model` folder contains the trained model
 
  0. Create the trained_model folder within Pose_3D directory
  1. Download the tar file: https://drive.google.com/file/d/1j2jpwDpfj5NNx8n1DVqCIAESNTDZ2BDf/view?usp=sharing
- 2. Create the following folders within `Pose_3D\trained_model` (yes all of them): `All\dropout_0.5\epochs_100\adam\lr_1e-05\linear_size1024\batch_size_32\use_stacked_hourglass\seqlen_5`
+ 2. Create the following folders within `Pose_3D/trained_model` (yes all of them): `trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5`
  3. Untar the downloaded file and move them to the above filepath.
 
 
@@ -65,7 +65,7 @@ Now that you have everything installed and downloaded, you need to do the follow
 
 Hossain and Little used a stacked-hourglass detector to get 2D pose estimates prior to running their 3D pose estimation script. In their code example, these 2D estimates are saved to an h5 file (`Pose_3D/fed/preds.h5`).
 
-I was more familiar with using PoseNet for 2D pose estimates, so I wrote some Javascript to record PoseNet estimates in the sequence per Human3.6M dataset standard (see the `Pose_2D\static\` folder).
+I was more familiar with using PoseNet for 2D pose estimates, so I wrote some Javascript to record PoseNet estimates in the sequence per Human3.6M dataset standard (see the `Pose_2D/static/` folder).
 
 For reference, below is a "conversion chart" for Human3.6M's and PoseNet's pose joint indices.
 
@@ -77,7 +77,7 @@ For reference, below is a "conversion chart" for Human3.6M's and PoseNet's pose 
 
 If you have no experience with 2D pose estimation, a good place to start is the `Pose_2D` folder.
 
- 1. Copy a video of your choice into `Pose_2D\static\` as `video.mp4` (If you're comfortable with some coding, modify `sketch.js` file, line `video = createVideo('static/video.mp4');`)
+ 1. Copy a video of your choice into `Pose_2D/static/` as `video.mp4` (If you're comfortable with some coding, modify `sketch.js` file, line `video = createVideo('static/video.mp4');`)
  2. With `Pose_2D` set as the current directory in terminal, type `flask run` to run a local server. You should see something like:
   ```
   * Environment: production
