@@ -41,9 +41,12 @@ tf.app.flags.DEFINE_boolean("camera_frame", False, "Convert 3d poses to camera c
 # CHANGED: h36m training data in custom directory location
 # tf.app.flags.DEFINE_string("data_dir", "/ubc/cs/research/tracking-raid/rayat137/code/eyescream/tensorflow/pose_estimation/h36m/Training","Data directory")
 tf.app.flags.DEFINE_string("data_dir", "h36m/","Data directory")
-tf.app.flags.DEFINE_string("data_2d_path", "fed/preds_fed.h5","Location of the 2D_pose detection")
 
-tf.app.flags.DEFINE_string("img_dir", "fed/","Image directory")
+# CHANGED: 2D pose estimate default filepath changed
+tf.app.flags.DEFINE_string("data_2d_path", "input_files/preds.h5","Location of the 2D_pose detection")
+
+# CHANGED: raw video frame images default directory changed
+tf.app.flags.DEFINE_string("img_dir", "input_files/","Image directory")
 tf.app.flags.DEFINE_integer("sub_id", 9, "Subject_id for camera for reconstruction")
 tf.app.flags.DEFINE_integer("cam_id", 2, "Camera_ID for reconstruction")
 
