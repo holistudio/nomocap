@@ -48,7 +48,7 @@ The `trained_model` folder contains the trained model
 
  0. Create the trained_model folder within Pose_3D directory
  1. Download the tar file: https://drive.google.com/file/d/1j2jpwDpfj5NNx8n1DVqCIAESNTDZ2BDf/view?usp=sharing
- 2. Create the following folders within `Pose_3D/trained_model` (yes all of them): `trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5`
+ 2. Create the following folders within `Pose_3D` (yes all of them): `trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5`
  3. Untar the downloaded file and move them to the above filepath.
 
 
