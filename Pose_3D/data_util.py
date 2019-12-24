@@ -381,9 +381,7 @@ def load_stacked_hourglass(data_dir,subjects,actions,verbose=True):
     for action in actions:
       if verbose:
         print('Reading subject {0}, action {1}'.format(subj, action))
-      # CHANGED: training data directory path based on StackedHourglass folder in the h36m directory
-      # dpath = os.path.join( data_dir, 'S{0}'.format(subj), 'post_accept_sh_finetuned_10it/{0}*.h5'.format(action))
-      dpath = os.path.join( data_dir, 'S{0}'.format(subj), 'StackedHourglass/{0}*.h5'.format(action) )
+      dpath = os.path.join( data_dir, 'S{0}'.format(subj), 'post_accept_sh_finetuned_10it/{0}*.h5'.format(action))
       print( dpath )
       fnames = glob.glob( dpath )
       loaded_seqs = 0
@@ -510,17 +508,13 @@ def read_3d_data( actions, data_dir, camera_frame=False,rcams=0,vcams=0,n_interp
 
   train_set = normalize_data( train_set, data_mean, data_std, dim_to_use, actions )
   test_set  = normalize_data( test_set,  data_mean, data_std, dim_to_use, actions )
+    # Load the offsets (bone lengths)
+  offsets_train = load_offsets( data_dir, [1, 5, 6, 7, 8] )
+  offsets_test  = load_offsets( data_dir, [9, 11] )
 
-  # Load the offsets (bone lengths)
-  # CHANGED: Commented out as offsets are unnecessary
-  # offsets_train = load_offsets( data_dir, [1, 5, 6, 7, 8] )
-  # offsets_test  = load_offsets( data_dir, [9, 11] )
+  return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions, offsets_train, offsets_test
 
-  # CHANGED: Commented out as offsets are unnecessary
-  # return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions, offsets_train, offsets_test
-  # CHANGED: Uncommented line below
-  return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions;
-
+  #return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use, train_root_positions, test_root_positions
 
 def postprocess_3d( poses_set ):
   """
