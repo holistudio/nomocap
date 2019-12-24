@@ -1,4 +1,5 @@
 Pose_3D/h36m/
+Pose_3D/trained_model/
 *.pyc
 *.ai
-.DS_Store
+*.DS_Store

@@ -1,2 +1,0 @@
-insert training files from tar file to here
-test

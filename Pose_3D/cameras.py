@@ -73,6 +73,7 @@ def obtain_mean_f_c():
   c_sum = np.zeros([2,1])
   f_sum = np.zeros([2,1])
   subjects=[1,5,6,7,8,9,11]
+  # with h5py.File('../cameras.h5','r') as hf:
   with h5py.File('cameras.h5','r') as hf:
     for s in subjects:
       for cams in range(4):
@@ -152,6 +153,7 @@ def interpolate( cameras, n_inter ):
 def load_cameras( bpath, subjects=[1,5,6,7,8,9,11], n_interpolations=0):
   # === Load 2d data the new way! ===
   rcams, vcams = {}, {}
+  # with h5py.File('../cameras.h5','r') as hf:
   with h5py.File('cameras.h5','r') as hf:
     for s in subjects:
 

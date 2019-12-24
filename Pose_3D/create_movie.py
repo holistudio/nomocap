@@ -34,10 +34,11 @@ tf.app.flags.DEFINE_integer("seqlen", 5, "Length of sequence")
 
 
 
-
-tf.app.flags.DEFINE_boolean("use_sh", False, "Use 2d pose predictions from StackedHourglass")
+# CHANGED: set default to true to avoid forgetting in command line
+tf.app.flags.DEFINE_boolean("use_sh", True, "Use 2d pose predictions from StackedHourglass")
 tf.app.flags.DEFINE_integer("linear_size", 1024, "Size of each model layer.")
-tf.app.flags.DEFINE_boolean("camera_frame", False, "Convert 3d poses to camera coordinates")
+# CHANGED: set default to true to avoid forgetting in command line
+tf.app.flags.DEFINE_boolean("camera_frame", True, "Convert 3d poses to camera coordinates")
 # CHANGED: h36m training data in custom directory location
 # tf.app.flags.DEFINE_string("data_dir", "/ubc/cs/research/tracking-raid/rayat137/code/eyescream/tensorflow/pose_estimation/h36m/Training","Data directory")
 tf.app.flags.DEFINE_string("data_dir", "h36m/","Data directory")
