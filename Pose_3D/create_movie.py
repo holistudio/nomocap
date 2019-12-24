@@ -9,6 +9,7 @@ import time
 import h5py
 import copy
 import glob
+import csv
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,14 +34,20 @@ tf.app.flags.DEFINE_integer("seqlen", 5, "Length of sequence")
 
 
 
-
-tf.app.flags.DEFINE_boolean("use_sh", False, "Use 2d pose predictions from StackedHourglass")
+# CHANGED: set default to true to avoid forgetting in command line
+tf.app.flags.DEFINE_boolean("use_sh", True, "Use 2d pose predictions from StackedHourglass")
 tf.app.flags.DEFINE_integer("linear_size", 1024, "Size of each model layer.")
-tf.app.flags.DEFINE_boolean("camera_frame", False, "Convert 3d poses to camera coordinates")
-tf.app.flags.DEFINE_string("data_dir", "/ubc/cs/research/tracking-raid/rayat137/code/eyescream/tensorflow/pose_estimation/h36m/Training","Data directory")
-tf.app.flags.DEFINE_string("data_2d_path", "fed/preds_fed.h5","Location of the 2D_pose detection")
+# CHANGED: set default to true to avoid forgetting in command line
+tf.app.flags.DEFINE_boolean("camera_frame", True, "Convert 3d poses to camera coordinates")
+# CHANGED: h36m training data in custom directory location
+# tf.app.flags.DEFINE_string("data_dir", "/ubc/cs/research/tracking-raid/rayat137/code/eyescream/tensorflow/pose_estimation/h36m/Training","Data directory")
+tf.app.flags.DEFINE_string("data_dir", "h36m/","Data directory")
 
-tf.app.flags.DEFINE_string("img_dir", "fed/","Image directory")
+# CHANGED: 2D pose estimate default filepath changed
+tf.app.flags.DEFINE_string("data_2d_path", "input_files/preds.h5","Location of the 2D_pose detection")
+
+# CHANGED: raw video frame images default directory changed
+tf.app.flags.DEFINE_string("img_dir", "input_files/","Image directory")
 tf.app.flags.DEFINE_integer("sub_id", 9, "Subject_id for camera for reconstruction")
 tf.app.flags.DEFINE_integer("cam_id", 2, "Camera_ID for reconstruction")
 
@@ -113,7 +120,10 @@ def create_movie():
   gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=1)
   device_count = {"GPU": 0} if FLAGS.use_cpu else {"GPU": 1}
   os.system('mkdir -p ' + FLAGS.output_dir)
-  train_set_3d, test_set_3d, data_mean_3d, data_std_3d, dim_to_ignore_3d, dim_to_use_3d, train_root_positions, test_root_positions, offsets_train, offsets_test = data_utils.read_3d_data(
+  # CHANGED: offsets removed
+  # train_set_3d, test_set_3d, data_mean_3d, data_std_3d, dim_to_ignore_3d, dim_to_use_3d, train_root_positions, test_root_positions, offsets_train, offsets_test = data_utils.read_3d_data(
+  #   actions, FLAGS.data_dir, FLAGS.camera_frame, rcams, vcams )
+  train_set_3d, test_set_3d, data_mean_3d, data_std_3d, dim_to_ignore_3d, dim_to_use_3d, train_root_positions, test_root_positions = data_utils.read_3d_data(
     actions, FLAGS.data_dir, FLAGS.camera_frame, rcams, vcams )
   if(FLAGS.use_sh):
     train_set_2d, test_set_2d, data_mean_2d, data_std_2d, dim_to_ignore_2d, dim_to_use_2d = data_utils.read_2d_predictions(actions, FLAGS.data_dir )
@@ -203,22 +213,31 @@ def create_movie():
 
     fnames = sorted(glob.glob(FLAGS.img_dir+"*.jpg"))
     #print(fnames[0],fnames[1])
-    for i in range(n2d):
-      #t0 = time()
-      print("Working on figure {0:04d} / {1:05d}... \n".format(i+1, n2d), end='')
-      p2d = enc_in[i,:]
-      im =  Image.open( fnames[i] )
-      ob1.update(im,p2d)
-      # Plot 3d gt
-      p3d = poses3d[i,:]
-      ob2.update(p3d)
-      fig.canvas.draw()
-      img_str = np.fromstring (fig.canvas.tostring_rgb(), np.uint8)
-      ncols, nrows = fig.canvas.get_width_height()
-      nparr = np.fromstring(img_str, dtype=np.uint8).reshape(nrows, ncols, 3)
-      #img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
-      print(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1))
-      cv2.imwrite(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1), nparr[:,:,::-1])
+
+    import csv
+
+    # CHANGED: write pose estimate coordinates to a csv file in the same output directory
+    with open((FLAGS.output_dir+'vertices.csv'), 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, quoting=csv.QUOTE_NONNUMERIC)
+        for i in range(n2d):
+          #t0 = time()
+          print("Working on figure {0:04d} / {1:05d}... \n".format(i+1, n2d), end='')
+          p2d = enc_in[i,:]
+          im =  Image.open( fnames[i] )
+          ob1.update(im,p2d)
+          # Plot 3d gt
+          p3d = poses3d[i,:]
+
+          # Each row of the csv file consists of all the x,y,z coordinates of a single 3D pose estimate.
+          spamwriter.writerow(p3d)
+          ob2.update(p3d)
+          fig.canvas.draw()
+          img_str = np.fromstring (fig.canvas.tostring_rgb(), np.uint8)
+          ncols, nrows = fig.canvas.get_width_height()
+          nparr = np.fromstring(img_str, dtype=np.uint8).reshape(nrows, ncols, 3)
+          #img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
+          print(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1))
+          cv2.imwrite(FLAGS.output_dir+'{0:05d}.jpg'.format(i+1), nparr[:,:,::-1])
 
 
 

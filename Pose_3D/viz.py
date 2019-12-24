@@ -55,8 +55,8 @@ class Ax3DPose(object):
         self.ax.set_xlim3d([-r+xroot, r+xroot])
         self.ax.set_zlim3d([-r+zroot, r+zroot])
         self.ax.set_ylim3d([-r+yroot, r+yroot])
-
-        self.ax.set_aspect('equal')
+        # CHANGED: 3D axes do not have an 'equal' aspect per Matplotlib documentation. Line below commented out
+        # self.ax.set_aspect('equal')
 
 
 def show3Dpose(channels, ax, lcolor="#3498db", rcolor="#e74c3c"): # blue, orange
@@ -151,9 +151,9 @@ class Ax2DPose(object):
           x = np.array( [vals[self.I[i], 0], vals[self.J[i], 0]] )
           y = np.array( [vals[self.I[i], 1], vals[self.J[i], 1]] )
           self.plots.append(self.ax.plot(x, y, lw=2, c=lcolor if self.LR[i] else rcolor))
-
-        self.ax.set_aspect('equal')
-        #self.ax.invert_yaxis()
+        # CHANGED: 3D axes do not have an 'equal' aspect per Matplotlib documentation. Line below commented out
+        # self.ax.set_aspect('equal')
+        # self.ax.invert_yaxis()
         self.ax.set_ylabel("z")
         self.ax.set_xlabel("x")
 
