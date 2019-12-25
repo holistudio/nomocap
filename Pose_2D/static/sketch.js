@@ -32,7 +32,7 @@ function mouseClicked() {
 function keyPressed() {
   // pressing any key starts the video and starts writing to a csv file
   if (value === 0) {
-    writer = createWriter('array.csv');
+    writer = createWriter('arrays.csv');
     video.play();
     video.hide();
     value = 255;
@@ -133,6 +133,9 @@ function draw() {
       // }
     }
     else{
+      //if PoseNet has trouble detecting poses,
+      //the frame where it can't is output to console
+      //The corresponding image frames should be removed from 'Pose_3D/input_files/'
       console.log(frameCount);
     }
 

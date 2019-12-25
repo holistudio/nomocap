@@ -88,8 +88,8 @@ If you have no experience with 2D pose estimation, a good place to start is the 
   * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
   ```
  3. Go to the `http://127.0.0.1:5000/` in a browser (or whichever address is in the terminal output above).
- 4. Press any key on your keyboard to start the video and 2D pose estimations. When your video is done playing, click the left mouse button. The browser should prompt you with an `array.csv` file. This contains the joint's 2D locations in the sequence adopted by Human3.6M and the Pose_3D code.
- 5. Save the `array.csv` file to the `Pose_3D/input_files/` folder. Inside that folder there should already be a script, `h5converter.py`, to take the csv file and generate the h5 file needed for the 3D pose estimates. (You may need to clean up the csv file, since it will have the first and last video frame as multiple rows. The key is to have the same number of rows in the array.csv file as the number of video frame images)
+ 4. Press any key on your keyboard to start the video and 2D pose estimations. When your video is done playing, click the left mouse button. The browser should prompt you with an `arrays.csv` file. This contains the joint's 2D locations in the sequence adopted by Human3.6M and the Pose_3D code.
+ 5. Save the `arrays.csv` file to the `Pose_3D/input_files/` folder. Inside that folder there should already be a script, `h5converter.py`, to take the csv file and generate the h5 file needed for the 3D pose estimates. (You may need to clean up the csv file, since it will have the first and last video frame as multiple rows. The key is to have the same number of rows in the array.csv file as the number of video frame images)
  6. Change directory to `Pose_3D/input_files/` and run `python h5converter.py`. Then you have a `preds.h5` file written.
  7. Assuming you have the video frame images, you're ready to run the Pose_3D `create_movie.py` code, as described in step 4 in the previous section.
 
