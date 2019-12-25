@@ -3,3 +3,7 @@ Pose_3D/trained_model/
 *.pyc
 *.ai
 *.DS_Store
+Pose_3D/trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5/checkpoint
+Pose_3D/trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5/checkpoint
+*.index
+Pose_3D/trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5/checkpoint-1798202.meta
