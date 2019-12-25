@@ -20,11 +20,14 @@ let poseShapes = [];
 
 let value = 0;
 
+let writerNotDone = true;
+
 function preload(){
   let writer;
 }
 
 function mouseClicked() {
+  writerNotDone = false;
   writer.close();
   writer.clear();
 }
@@ -47,7 +50,7 @@ function gotPoses(estimatedPoses){
 
 function setup() {
   createCanvas(w, h);
-  frameRate(30);
+  // frameRate(30);
   // load video of human movement
   video = createVideo('static/video.mp4');
   video.size(w, h);
@@ -131,6 +134,10 @@ function draw() {
       // for (let i = 0; i < keyShape.length; i++) {
       //   writer.print(`v ${objRecordX} ${keyShape[i].x} ${video.height-keyShape[i].y}`);
       // }
+      if(writerNotDone){
+        console.log(`${frameCount} Recorded`);
+      }
+
     }
     else{
       //if PoseNet has trouble detecting poses,
