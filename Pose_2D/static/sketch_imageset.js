@@ -1,7 +1,7 @@
 var keyPtsOfInterest = [0,5,6,7,8,9,10,11,12,13,14,15,16];
 //                      0,1,2,3,4,5, 6, 7, 8, 9,10,11,12, 13hip, 14neck, 15head;
 let imgNum = 0;
-let numImages = 28;
+let numImages = 68;
 
 let poseNet;
 let w = 640;
@@ -65,7 +65,7 @@ function setup() {
 
 
   createCanvas(w, h);
-  img = createImg(`static/image_set/changquan3s00.jpg`, imageReady);
+  img = createImg(`static/image_set/nanquan4s00.jpg`, imageReady);
   img.size(width, height);
   img.hide();
   // console.log(img)
@@ -77,10 +77,10 @@ function draw() {
 
   background(0);
   if(imgNum<10){
-    img.elt.src=`static/image_set/changquan3s0${imgNum}.jpg`;
+    img.elt.src=`static/image_set/nanquan4s0${imgNum}.jpg`;
   }
   else{
-    img.elt.src=`static/image_set/changquan3s${imgNum}.jpg`;
+    img.elt.src=`static/image_set/nanquan4s${imgNum}.jpg`;
   }
   //for each image in image_set folder
   image(img, 0, 0, width, height);
