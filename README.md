@@ -106,6 +106,10 @@ If you have no experience with 2D pose estimation, a good place to start is the 
 
 Viewing the 3D poses in a 3D environment can be done with code in `Pose_3DView`. Additional instructions can be found in the README in that folder. Copy paste `Pose_3D/output_result/vertices.csv` into `Pose_3DView/data/`.
 
+## TO-DOS
+ - [ ] Re-write sketch.js to estimate 2D poses based on a set image frames as input instead of a video.
+
+
 ## References
 
 The Pose_3D code is slightly modified from code referenced in Hossain and Little's [paper](http://openaccess.thecvf.com/content_ECCV_2018/html/Mir_Rayat_Imtiaz_Hossain_Exploiting_temporal_information_ECCV_2018_paper.html):
