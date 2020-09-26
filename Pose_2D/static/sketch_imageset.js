@@ -73,7 +73,13 @@ function draw() {
     if (poses.length > 0) {
         image(img, 0, 0, width, height);
         drawKeypoints(poses);
-        noLoop(); // stop looping when the poses are estimated
+        if((imgNum+1)<numImages){
+          imgNum++;
+
+        }
+        else{
+          noLoop();
+        }
     }
 
 }
