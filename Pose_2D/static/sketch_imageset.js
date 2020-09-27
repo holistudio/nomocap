@@ -10,9 +10,9 @@ let imgNumStr = '';
 //Custom Image Set Info
 //Set these variables correctly BEFORE opening the webpage
 
-let numImages = 95; //number of images extracted from video
-let imageName = 'wangdi'; //image name repeated across all video images
-let imgWidth = 500;
+let numImages = 68; //number of images extracted from video
+let imageName = 'nanquan4s'; //image name repeated across all video images
+let imgWidth = 640;
 let imgHeight = 480;
 //example: image files extracted 'wangdi.mp4' video are all named 'wangdi00.jpg', 'changquan2s01.jpg',...,etc.
 //imageName = 'changquan2s'; in that case
