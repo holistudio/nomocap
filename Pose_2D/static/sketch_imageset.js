@@ -54,7 +54,7 @@ function imageReady(){
 
 // when poseNet is ready, do the detection
 function modelReady() {
-    select('#status').html(`Image ${imgNum}`);
+    select('#status').html(`Image ${imgNum} of ${numImages}`);
 
     // When the model is ready, run the singlePose() function...
     // If/When a pose is detected, poseNet.on('pose', ...) will be listening for the detection results
@@ -100,7 +100,7 @@ function draw() {
           img.hide(); // hide the image in the browser
         }
         else{
-          select('#status').html('Done!');
+          select('#status').html('Done! Click anywhere on the screen to save arrays.csv which contains Human 3.6M pose data');
           noLoop();
         }
     }
