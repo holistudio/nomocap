@@ -6,7 +6,7 @@ let poses = [];
 let poseShapes = [];
 let imgNum = 0;
 let imgNumStr = '';
-let numImages = 68;
+let numImages = 77;
 function preload(){
   let writer;
 }
@@ -28,7 +28,7 @@ function setup() {
     else {
       imgNumStr = `${imgNum}`;
     }
-    img = createImg(`static/image_set/nanquan4s${imgNumStr}.jpg`, imageReady);
+    img = createImg(`static/image_set/changquan2s${imgNumStr}.jpg`, imageReady);
     // set the image size to the size of the canvas
     img.size(width, height);
 
@@ -93,7 +93,7 @@ function draw() {
           else {
             imgNumStr = `${imgNum}`;
           }
-          img = createImg(`static/image_set/nanquan4s${imgNumStr}.jpg`, imageReady);
+          img = createImg(`static/image_set/changquan2s${imgNumStr}.jpg`, imageReady);
           // set the image size to the size of the canvas
           img.size(width, height);
 
