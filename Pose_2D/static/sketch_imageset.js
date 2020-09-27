@@ -7,7 +7,16 @@ let poseShapes = [];
 let imgNum = 0;
 let imgNumStr = '';
 let numImages = 68;
+function preload(){
+  let writer;
+}
+function mouseClicked() {
+  writerNotDone = false;
+  writer.close();
+  writer.clear();
+}
 function setup() {
+    writer = createWriter('arrays.csv');
     createCanvas(640, 480);
     fill(255);
     // create an image using the p5 dom library
@@ -97,26 +106,7 @@ function draw() {
     }
 
 }
-// function draw() {
-//
-//     if (poses.length > 0) {
-//         image(img, 0, 0, 640, 480);
-//         var pose = poses[0].pose;
-//
-//
-//     }
-//     if((imgNum+1)<numImages){
-//       imgNum++;
-//
-//     }
-//     else{
-//       noLoop();
-//     }
-//
-// }
 
-// The following comes from https://ml5js.org/docs/posenet-webcam
-// A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
     // Loop through all the poses detected
     // For first pose detected, loop through all the keypoints
@@ -160,6 +150,7 @@ function drawKeypoints() {
         circle(keyShape[i].x, keyShape[i].y, 5);
       }
 
+      writer.print(`${keyShape[13].x},${keyShape[13].y},${keyShape[8].x},${keyShape[8].y},${keyShape[12].x},${keyShape[12].y},${keyShape[12].x},${keyShape[12].y},0,0,0,0,${keyShape[7].x},${keyShape[7].y},${keyShape[9].x},${keyShape[9].y},${keyShape[11].x},${keyShape[11].y},0,0,0,0,0,0,${keyShape[14].x},${keyShape[14].y},${keyShape[0].x},${keyShape[0].y},0,0,${keyShape[15].x},${keyShape[15].y},0,0,${keyShape[1].x},${keyShape[1].y},${keyShape[3].x},${keyShape[3].y},${keyShape[5].x},${keyShape[5].y},0,0,0,0,0,0,0,0,0,0,${keyShape[2].x},${keyShape[2].y},${keyShape[4].x},${keyShape[4].y},${keyShape[6].x},${keyShape[6].y},0,0,0,0,0,0,0,0`);
     }
     else{
       //if PoseNet has trouble detecting poses,
