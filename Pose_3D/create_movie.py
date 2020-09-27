@@ -12,10 +12,10 @@ import glob
 import csv
 
 
-# Uncomment these two lines for Mac Users
+
 import matplotlib
 matplotlib.use('TkAgg')
-# Uncomment above two lines for Mac Users
+
 import matplotlib.pyplot as plt
 import numpy as np
 from six.moves import xrange  # pylint: disable=redefined-builtin
