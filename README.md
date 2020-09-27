@@ -114,7 +114,7 @@ Viewing the 3D poses in a 3D environment can be done with code in `Pose_3DView`.
  - [x] Test with a wushu competition video.
 
 # Final Thoughts
-Currently the model has been trained on common place poses, such as standing and sitting. If the recorded movements/actions/poses are not deviating too far from this, your estimated 3D poses may be somewhat accurate. For movements that are fast and varied, as is common in sports, this means your results may not be accurate enough.
+Currently the model has been trained on common place poses, such as standing and sitting. If the recorded movements/actions/poses are not deviating too far from this, your estimated 3D poses may be somewhat accurate. For movements that are fast and varied, as is common in sports, this means your results may not be accurate enough. Fast movements may result in blurry input images, making it difficult for certain 2D pose estimates, which Pose_3D depends on for 3D predictions.
 
 The current Pose_2D code still only works as intended when only one person is visible in the video/images. Otherwise, PoseNet will detect key joints for all poses detected and not give priority to a single person of interest. This issue needs to be resolved before one can really do motion capture "in the wild."
 
