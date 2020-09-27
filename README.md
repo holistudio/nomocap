@@ -57,7 +57,7 @@ Now that you have everything installed and downloaded, you need to do the follow
 
 1. Get 2D pose estimate data from raw video saved as a `*.h5` file. This can be done with code in the `Pose_2D` folder. More on this in the next section.
 2. Get image frames of the video as jpg files. This can be done using Premiere to export the raw video as jpg files for frames at the same framerate as your 2D pose estimate data (likely ~30fps). Other methods may be available online if you don't have Premiere.
-3. Save files from both steps into `Pose_3D/input_files`
+3. Save files from both steps 1 and 2 into `Pose_3D/input_files`
 4. In terminal, set current directory as `Pose_3D` run the `create_movie.py` script (`python create_movie.py`). If you are using a virtual environment, of course, make sure it's activated.
 5. Results will be in `Pose_3D/output_results`, including a sequence of images showing the 3D pose results and a csv file of X,Y,Z coordinates of pose joint estimates (`vertices.csv`).
 6. The `vertices.csv` can be used to generate 3D animations of the 3D pose estimate. A example code of how to do this with OpenGL is in the `Pose_3DView` folder.
@@ -78,8 +78,15 @@ For reference, below is a "conversion chart" for Human3.6M's and PoseNet's pose 
 
 If you have no experience with 2D pose estimation, a good place to start is the `Pose_2D` folder.
 
- 1. Copy a video of your choice into `Pose_2D/static/` as `video.mp4` (If you're comfortable with some coding, modify `sketch.js` file, line `video = createVideo('static/video.mp4');`)
- 2. With `Pose_2D` set as the current directory in terminal, type `flask run` to run a local server. You should see something like:
+ 1. Use the images extracted from the video and save them to the `Pose_2D/static/image_set/` folder. Note the total number of images you extracted and their file name convention.
+ 2. Open the script `Pose_2D/static/sketch_imageset.js`. Two very important lines of code need to be edited depending on your images and their filenames:
+ ```
+ let numImages = 77; //number of images extracted from video
+ let imageName = 'changquan2s'; //image name repeated across all video images
+ //example: image files extracted 'changquan2s.mp4' video are all named 'changquan2s00.jpg', 'changquan2s01.jpg',...,etc.
+ //imageName = 'changquan2s'; in that case
+ ```
+ 3. With `Pose_2D` set as the current directory in terminal, type `flask run` to run a local server. You should see something like:
   ```
   * Environment: production
     WARNING: This is a development server. Do not use it in a production deployment.
@@ -87,18 +94,19 @@ If you have no experience with 2D pose estimation, a good place to start is the 
   * Debug mode: off
   * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
   ```
- 3. Go to the `http://127.0.0.1:5000/` in a browser (or whichever address is in the terminal output above).
- 4. Press any key on your keyboard to start the video and 2D pose estimations. When your video is done playing, click the left mouse button. The browser should prompt you with an `arrays.csv` file. This contains the joint's 2D locations in the sequence adopted by Human3.6M and the Pose_3D code.
- 5. Save the `arrays.csv` file to the `Pose_3D/input_files/` folder. Inside that folder there should already be a script, `h5converter.py`, to take the csv file and generate the h5 file needed for the 3D pose estimates. (You may need to clean up the csv file, since it will have the first and last video frame as multiple rows. The key is to have the same number of rows in the array.csv file as the number of video frame images)
- 6. Change directory to `Pose_3D/input_files/` and run `python h5converter.py`. Then you have a `preds.h5` file written.
- 7. Assuming you have the video frame images, you're ready to run the Pose_3D `create_movie.py` code, as described in step 4 in the previous section.
+ 4. Go to the `http://127.0.0.1:5000/` in a browser (or whichever address is in the terminal output above).
+ 5. The images will automatically be loaded one by one, with PoseNet estimating 2D key joint positions for each. Text on the top of the webpage will inform when all the images are processed.
+ 6. Click anywhere on the webpage to save the `arrays.csv` file to the `Pose_3D/input_files/` folder. Inside that folder there should already be a script, `h5converter.py`, to take the csv file and generate the h5 file needed for the 3D pose estimates.
+ 7. Change directory to `Pose_3D/input_files/` and run `python h5converter.py`. Then you have a `preds.h5` file written. You're now ready to run the Pose_3D `create_movie.py` code, as described in step 4 in the previous section.
 
 ### Pose_3DView - Viewing 3D Pose Animations in 3D
 
 Viewing the 3D poses in a 3D environment can be done with code in `Pose_3DView`. Additional instructions can be found in the README in that folder. Copy paste `Pose_3D/output_result/vertices.csv` into `Pose_3DView/data/`.
 
 ## TO-DOS
- - [ ] Re-write sketch.js to estimate 2D poses based on a set image frames as input instead of a video.
+ - [x] Re-write sketch.js to estimate 2D poses based on a set image frames as input instead of a video.
+ - [x] Resolve issues with create_movie.py broken estimations (possibly due to the h5converter.py script)
+ - [ ] Test with a wushu competition video.
 
 
 ## References
