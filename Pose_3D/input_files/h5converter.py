@@ -13,4 +13,5 @@ with open('arrays.csv', newline='') as csvfile:
         for row in reader:
             dset[i] = np.array(row).astype(np.float);
             i=i+1;
-            print(i);
+    with h5py.File("preds.h5", "r") as f:
+        print(f['enc_in'][:].shape);
