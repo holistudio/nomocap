@@ -6,7 +6,7 @@ let poses = [];
 let poseShapes = [];
 let imgNum = 0;
 let imgNumStr = '';
-let numImages = 1;
+let numImages = 68;
 function setup() {
     createCanvas(640, 480);
     fill(255);
@@ -24,7 +24,7 @@ function setup() {
     img.size(width, height);
 
     img.hide(); // hide the image in the browser
-    frameRate(1); // set the frameRate to 1 since we don't need it to be running quickly in this case
+    frameRate(2); // set the frameRate to 1 since we don't need it to be running quickly in this case
 }
 
 // when the image is ready, then load up poseNet
@@ -45,7 +45,7 @@ function imageReady(){
 
 // when poseNet is ready, do the detection
 function modelReady() {
-    select('#status').html('Model Loaded');
+    select('#status').html(`Image ${imgNum}`);
 
     // When the model is ready, run the singlePose() function...
     // If/When a pose is detected, poseNet.on('pose', ...) will be listening for the detection results
@@ -72,13 +72,26 @@ function distance(point1, point2){
 // draw() will not show anything until poses are found
 function draw() {
     if (poses.length > 0) {
+
         image(img, 0, 0, width, height);
         drawKeypoints(poses);
         if((imgNum+1)<numImages){
           imgNum++;
+          if(imgNum<10)
+          {
+            imgNumStr = `0${imgNum}`;
+          }
+          else {
+            imgNumStr = `${imgNum}`;
+          }
+          img = createImg(`static/image_set/nanquan4s${imgNumStr}.jpg`, imageReady);
+          // set the image size to the size of the canvas
+          img.size(width, height);
 
+          img.hide(); // hide the image in the browser
         }
         else{
+          select('#status').html('Done!');
           noLoop();
         }
     }
