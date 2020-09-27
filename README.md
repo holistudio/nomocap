@@ -50,15 +50,6 @@ The `trained_model` folder contains the trained model
  1. Download the tar file: https://drive.google.com/file/d/1j2jpwDpfj5NNx8n1DVqCIAESNTDZ2BDf/view?usp=sharing
  2. Untar the archive and move the files to here: `Pose_3D/trained_model/All/dropout_0.5/epochs_100/adam/lr_1e-05/linear_size1024/batch_size_32/use_stacked_hourglass/seqlen_5`
 
-### Mac Users
-
-**One more thing** for Mac users: `Pose_3D/create_movie.py` needs two lines of code uncommented, due to some issues with matplotlib on Mac.
-```
-# Uncomment these two lines for Mac Users
-import matplotlib
-matplotlib.use('TkAgg')
-# Uncomment above two lines for Mac Users
-```
 
 ### OK Now We're Ready!
 
