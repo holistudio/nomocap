@@ -111,8 +111,19 @@ Viewing the 3D poses in a 3D environment can be done with code in `Pose_3DView`.
 ## TO-DOS
  - [x] Re-write sketch.js to estimate 2D poses based on a set image frames as input instead of a video.
  - [x] Resolve issues with create_movie.py broken estimations (possibly due to the h5converter.py script)
- - [ ] Test with a wushu competition video.
+ - [x] Test with a wushu competition video.
 
+# Final Thoughts
+Currently the model has been trained on common place poses, such as standing and sitting. If the recorded movements/actions/poses are not deviating too far from this, your estimated 3D poses may be somewhat accurate. For movements that are fast and varied, as is common in sports, this means your results may not be accurate enough.
+
+The current Pose_2D code still only works as intended when only one person is visible in the video/images. Otherwise, PoseNet will detect key joints for all poses detected and not give priority to a single person of interest. This issue needs to be resolved before one can really do motion capture "in the wild."
+
+This project was originally conceived for analyzing martial arts competition videos. Obviously, it would be best if a martial arts based 3D movement and pose dataset were developed to train this machine learning model first. A current dream is to one day experiment with multi-camera setups in the relatively controlled competition environments, since multiple cameras can improve accuracy and it is common for multiple cameras to be present in those environments in the first place.
+
+
+<img src="img/profile_posenet.jpg" width="500" />
+
+(Note the elbow and right hands are not recognized in 2D)
 
 ## References
 
