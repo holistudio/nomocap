@@ -5,20 +5,21 @@ let poseNet;
 let poses = [];
 let poseShapes = [];
 let imgNum = 0;
+let imgNumStr = '';
 let numImages = 1;
 function setup() {
     createCanvas(640, 480);
     fill(255);
     // create an image using the p5 dom library
     // call modelReady() when it is loaded
-    // if(imgNum<10)
-    // {
-    //   imgNumStr = `0${imgNum}`;
-    // }
-    // else {
-    //   imgNumStr = `${imgNum}`;
-    // }
-    img = createImg('static/image_set/nanquan4s00.jpg', imageReady);
+    if(imgNum<10)
+    {
+      imgNumStr = `0${imgNum}`;
+    }
+    else {
+      imgNumStr = `${imgNum}`;
+    }
+    img = createImg(`static/image_set/nanquan4s${imgNumStr}.jpg`, imageReady);
     // set the image size to the size of the canvas
     img.size(width, height);
 
