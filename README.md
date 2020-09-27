@@ -99,6 +99,8 @@ If you have no experience with 2D pose estimation, a good place to start is the 
  6. Click anywhere on the webpage to save the `arrays.csv` file to the `Pose_3D/input_files/` folder. Inside that folder there should already be a script, `h5converter.py`, to take the csv file and generate the h5 file needed for the 3D pose estimates.
  7. Change directory to `Pose_3D/input_files/` and run `python h5converter.py`. Then you have a `preds.h5` file written. You're now ready to run the Pose_3D `create_movie.py` code, as described in step 4 in the previous section.
 
+A previous version of this script used the video as input instead of images. There were several issues with this version, most importantly that the rate of 2D pose capture did not match well with the images already extracted from video software. If you're going to use the images for Pose_3D, why not use them for Pose_2D as well? For those still curious about using the "video version", see the Pose_2D_Video folder.
+
 ### Pose_3DView - Viewing 3D Pose Animations in 3D
 
 Viewing the 3D poses in a 3D environment can be done with code in `Pose_3DView`. Additional instructions can be found in the README in that folder. Copy paste `Pose_3D/output_result/vertices.csv` into `Pose_3DView/data/`.

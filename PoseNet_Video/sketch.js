@@ -1,21 +1,67 @@
 var keyPtsOfInterest = [0,5,6,7,8,9,10,11,12,13,14,15,16];
 //                      0,1,2,3,4,5, 6, 7, 8, 9,10,11,12, 13hip, 14neck, 15head;
-let imgNum = 0;
-let numImages = 68;
+let spacing = 10;
+let drawFrame = 0;
+let numDrawFrames = 10;
 
+let video;
 let poseNet;
 let w = 640;
 let h = 480;
 
 let writer;
+const objRecordRate = 5;
+const objRecordSpacing = 50;
+let objRecordX = 0;
+let keyVertex = 1;
 
 let poses = [];
 let poseShapes = [];
+
+let value = 0;
 
 let writerNotDone = true;
 
 function preload(){
   let writer;
+}
+
+function mouseClicked() {
+  writerNotDone = false;
+  writer.close();
+  writer.clear();
+}
+
+function keyPressed() {
+  // pressing any key starts the video and starts writing to a csv file
+  if (value === 0) {
+    writer = createWriter('arrays.csv');
+    video.play();
+    video.hide();
+    value = 255;
+  } else {
+    value = 0;
+  }
+}
+
+function gotPoses(estimatedPoses){
+  poses = estimatedPoses;
+}
+
+function setup() {
+  createCanvas(w, h);
+  // frameRate(30);
+  // load video of human movement
+  video = createVideo('static/video.mp4');
+  video.size(w, h);
+
+  poseNet = ml5.poseNet(video);
+  // This sets up an event that fills the global variable "poses"
+  // with an array every time new poses are detected
+  poseNet.on('pose', function(results) {
+    poses = results;
+	});
+  fill(255);
 }
 
 function midPoint(point1, point2){
@@ -36,58 +82,13 @@ function distance(point1, point2){
   return dist;
 }
 
-// when poseNet is ready, do the detection
-function modelReady() {
-    // When the model is ready, run the singlePose() function...
-    // If/When a pose is detected, poseNet.on('pose', ...) will be listening for the detection results
-    // in the draw() loop, if there are any poses, then carry out the draw commands
-    poseNet.singlePose(img)
-}
-function imageReady(){
-    // set some options
-    let options = {
-        imageScaleFactor: 1,
-        minConfidence: 0.1
-    }
-
-    // assign poseNet
-    poseNet = ml5.poseNet(modelReady, options);
-
-    // This sets up an event that listens to 'pose' events
-    poseNet.on('pose', function (results) {
-        poses = results;
-    });
-}
-
-function setup() {
-  writer = createWriter('arrays.csv');
-  //count number of jpg images in image_set folder
-
-
-  createCanvas(w, h);
-  img = createImg(`static/image_set/nanquan4s00.jpg`, imageReady);
-  img.size(width, height);
-  img.hide();
-  // console.log(img)
-  frameRate(1);
-
-}
-
 function draw() {
 
   background(0);
-  if(imgNum<10){
-    img.elt.src=`static/image_set/nanquan4s0${imgNum}.jpg`;
-  }
-  else{
-    img.elt.src=`static/image_set/nanquan4s${imgNum}.jpg`;
-  }
-  //for each image in image_set folder
-  image(img, 0, 0, width, height);
+  image(video, 0, 0, video.width, video.height);
 
-  //poseNet analyzes the image
   if(poses.length>=1){
-    //for first pose detected
+    //for each pose detected
     var pose = poses[0].pose;
 
     //record newest shape
@@ -144,15 +145,5 @@ function draw() {
       console.log(frameCount);
     }
 
-  }
-  if(imgNum<numImages){
-    imgNum++;
-
-  }
-  else{
-    writerNotDone = false;
-    writer.close();
-    writer.clear();
-    noLoop();
   }
 }
