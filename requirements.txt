@@ -6,3 +6,4 @@ tensorflow==1.15.2
 Flask
 Flask-Session
 psycopg2-binary
+pandas
