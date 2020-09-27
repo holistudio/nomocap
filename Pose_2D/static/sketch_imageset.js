@@ -6,7 +6,15 @@ let poses = [];
 let poseShapes = [];
 let imgNum = 0;
 let imgNumStr = '';
-let numImages = 77;
+
+//Custom Image Set Info
+//Set these variables correctly BEFORE opening the webpage
+
+let numImages = 68; //number of images extracted from video
+let imageName = 'nanquan4s'; //image name repeated across all video images
+//example: image files extracted 'changquan2s.mp4' video are all named 'changquan2s00.jpg', 'changquan2s01.jpg',...,etc.
+//imageName = 'changquan2s'; in that case
+
 function preload(){
   let writer;
 }
@@ -28,7 +36,7 @@ function setup() {
     else {
       imgNumStr = `${imgNum}`;
     }
-    img = createImg(`static/image_set/changquan2s${imgNumStr}.jpg`, imageReady);
+    img = createImg(`static/image_set/${imageName}${imgNumStr}.jpg`, imageReady);
     // set the image size to the size of the canvas
     img.size(width, height);
 
@@ -93,7 +101,7 @@ function draw() {
           else {
             imgNumStr = `${imgNum}`;
           }
-          img = createImg(`static/image_set/changquan2s${imgNumStr}.jpg`, imageReady);
+          img = createImg(`static/image_set/${imageName}${imgNumStr}.jpg`, imageReady);
           // set the image size to the size of the canvas
           img.size(width, height);
 
