@@ -10,10 +10,13 @@ let imgNumStr = '';
 //Custom Image Set Info
 //Set these variables correctly BEFORE opening the webpage
 
-let numImages = 77; //number of images extracted from video
-let imageName = 'changquan2s'; //image name repeated across all video images
-//example: image files extracted 'changquan2s.mp4' video are all named 'changquan2s00.jpg', 'changquan2s01.jpg',...,etc.
+let numImages = 95; //number of images extracted from video
+let imageName = 'wangdi'; //image name repeated across all video images
+let imgWidth = 500;
+let imgHeight = 480;
+//example: image files extracted 'wangdi.mp4' video are all named 'wangdi00.jpg', 'changquan2s01.jpg',...,etc.
 //imageName = 'changquan2s'; in that case
+//if you have over 100 or 1000 images in sequence other parts of the code (imgNumStr = `0${imgNum}`;) need to be modified
 
 function preload(){
   let writer;
@@ -25,7 +28,7 @@ function mouseClicked() {
 }
 function setup() {
     writer = createWriter('arrays.csv');
-    createCanvas(640, 480);
+    createCanvas(imgWidth, imgHeight);
     fill(255);
     // create an image using the p5 dom library
     // call modelReady() when it is loaded

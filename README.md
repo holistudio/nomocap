@@ -81,10 +81,13 @@ If you have no experience with 2D pose estimation, a good place to start is the 
  1. Use the images extracted from the video and save them to the `Pose_2D/static/image_set/` folder. Note the total number of images you extracted and their file name convention.
  2. Open the script `Pose_2D/static/sketch_imageset.js`. Two very important lines of code need to be edited depending on your images and their filenames:
  ```
- let numImages = 77; //number of images extracted from video
- let imageName = 'changquan2s'; //image name repeated across all video images
- //example: image files extracted 'changquan2s.mp4' video are all named 'changquan2s00.jpg', 'changquan2s01.jpg',...,etc.
+ let numImages = 95; //number of images extracted from video
+ let imageName = 'wangdi'; //image name repeated across all video images
+ let imgWidth = 500;
+ let imgHeight = 480;
+ //example: image files extracted 'wangdi.mp4' video are all named 'wangdi00.jpg', 'changquan2s01.jpg',...,etc.
  //imageName = 'changquan2s'; in that case
+ //if you have over 100 or 1000 images in sequence other parts of the code (imgNumStr = `0${imgNum}`;) need to be modified
  ```
  3. With `Pose_2D` set as the current directory in terminal, type `flask run` to run a local server. You should see something like:
   ```
